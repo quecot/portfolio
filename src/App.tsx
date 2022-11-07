@@ -72,13 +72,13 @@ function App() {
       <button onClick={handleWorkButton}>WORK</button>
     </div>
     <div id="nav-social-section" className="nav-section">
-      <a target="_blank" href="https://twitter.com">
+      <a aria-label="Twitter link" target="_blank" href="https://twitter.com">
         <i className="fa-brands fa-twitter"></i>
       </a>
-      <a target="_blank" href="https://www.linkedin.com/">
+      <a aria-label="LinkedIn link" target="_blank" href="https://www.linkedin.com/">
         <i className="fa-brands fa-linkedin"></i>
       </a>
-      <a target="_blank" href="https://github.com/">
+      <a aria-label="Github link" target="_blank" href="https://github.com/">
         <i className="fa-brands fa-github"></i>
       </a>
     </div>

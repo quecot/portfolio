@@ -144,6 +144,10 @@ main > article[data-status='becoming-active-from-after'] {
   transform: translateY(118px);
 }
 
+.contact-page[data-status='contact-active'] {
+  z-index: 10;
+}
+
 .about-page[data-status='about-inactive'],
 .contact-page[data-status='contact-inactive'] {
   transform: translateY(100%);

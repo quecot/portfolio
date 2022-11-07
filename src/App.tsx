@@ -1,10 +1,13 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 
-function App() {
-  let activeIndex = 0;
-  let isAboutPageActive = false;
-  let isContactPageActive = false;
+import ContactPage from './components/contact_page';
+
+const App = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAboutPageActive, setAboutPageActive] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isContactPageActive, setContactPageActive] = useState(false);
   const slides = document.getElementsByTagName('article');
 
   const handleLeftClick = () => {
@@ -19,7 +22,7 @@ function App() {
 
     setTimeout(() => {
       nextSlide.dataset.status = 'active';
-      activeIndex = nextIndex;
+      setActiveIndex(nextIndex);
     });
   };
 
@@ -35,16 +38,22 @@ function App() {
 
     setTimeout(() => {
       nextSlide.dataset.status = 'active';
-      activeIndex = nextIndex;
+      setActiveIndex(nextIndex);
     });
   };
 
   const handleAboutButton = () => {
     if (!isAboutPageActive) {
       const aboutPage = (document.querySelector('.about-page') as HTMLElement);
+      const contactPage = (document.querySelector('.contact-page') as HTMLElement);
       aboutPage.dataset.status = 'about-active';
-      isAboutPageActive = true;
+      setAboutPageActive(true);
       document.title = 'About | Francesc Vila Subias';
+      aboutPage.style.zIndex = '10';
+      contactPage.style.zIndex = '0';
+    } else {
+      const contactPage = (document.querySelector('.contact-page') as HTMLElement);
+      contactPage.dataset.status = 'contact-inactive';
     }
   };
 
@@ -52,25 +61,21 @@ function App() {
     if (isAboutPageActive) {
       const aboutPage = (document.querySelector('.about-page') as HTMLElement);
       aboutPage.dataset.status = 'about-inactive';
-      isAboutPageActive = false;
+      setAboutPageActive(false);
       document.title = 'Work | Francesc Vila Subias';
+      const contactPage = (document.querySelector('.contact-page') as HTMLElement);
+      contactPage.dataset.status = 'contact-inactive';
     }
   };
 
   const handleContact = () => {
-    if (!isContactPageActive) {
-      const contactPage = (document.querySelector('.contact-page') as HTMLElement);
-      contactPage.dataset.status = 'contact-active';
-      isContactPageActive = true;
-      document.title = 'Contact | Francesc Vila Subias';
-    }
-  };
-
-  const closeContact = () => {
     const contactPage = (document.querySelector('.contact-page') as HTMLElement);
-    contactPage.dataset.status = 'contact-inactive';
-    isContactPageActive = false;
-    document.title = isAboutPageActive ? 'About | Francesc Vila Subias' : 'Work | Francesc Vila Subias';
+    const aboutPage = (document.querySelector('.about-page') as HTMLElement);
+    contactPage.dataset.status = 'contact-active';
+    setContactPageActive(true);
+    document.title = 'Contact | Francesc Vila Subias';
+    aboutPage.style.zIndex = '0';
+    contactPage.style.zIndex = '10';
   };
 
   return (
@@ -111,14 +116,17 @@ function App() {
               <h2>Primer post de prova</h2>
             </a>
             <a aria-label="Link to project" href="/">
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 37.5q-.5 0-.825-.325-.325-.325-.325-.825v-11.2h-11.2q-.5 0-.825-.325Q10.5 24.5 10.5 24q0-.5.325-.825.325-.325.825-.325h11.2v-11.2q0-.5.325-.825.325-.325.825-.325.5 0 .825.325.325.325.325.825v11.2h11.2q.5 0 .825.325.325.325.325.825 0 .5-.325.825-.325.325-.825.325h-11.2v11.2q0 .5-.325.825-.325.325-.825.325Z" /></svg>
             </a>
           </div>
           <div className="article-nav-section article-section">
             <button type="button" aria-label="Previous article" onClick={handleLeftClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M27.2 34.5 17.7 25q-.25-.25-.35-.5-.1-.25-.1-.55 0-.3.1-.525.1-.225.35-.475l9.55-9.55q.35-.35.825-.35t.825.35q.3.35.3.85t-.35.85l-8.9 8.85 8.95 8.95q.3.35.3.775 0 .425-.3.825-.35.35-.85.35t-.85-.35Z" /></svg>
             </button>
             <button type="button" aria-label="Next article" onClick={handleRightClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M17.95 34.5q-.3-.4-.325-.85-.025-.45.325-.8l8.9-8.9-8.9-8.9q-.35-.3-.325-.8.025-.5.325-.85.4-.35.825-.35.425 0 .775.35l9.55 9.55q.25.25.35.475.1.225.1.525 0 .3-.1.55-.1.25-.35.5l-9.5 9.5q-.35.35-.8.325-.45-.025-.85-.325Z" /></svg>
             </button>
           </div>
@@ -133,14 +141,17 @@ function App() {
               <h2>Segon post de prova</h2>
             </a>
             <a aria-label="Link to project" href="/">
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 37.5q-.5 0-.825-.325-.325-.325-.325-.825v-11.2h-11.2q-.5 0-.825-.325Q10.5 24.5 10.5 24q0-.5.325-.825.325-.325.825-.325h11.2v-11.2q0-.5.325-.825.325-.325.825-.325.5 0 .825.325.325.325.325.825v11.2h11.2q.5 0 .825.325.325.325.325.825 0 .5-.325.825-.325.325-.825.325h-11.2v11.2q0 .5-.325.825-.325.325-.825.325Z" /></svg>
             </a>
           </div>
           <div className="article-nav-section article-section">
             <button type="button" aria-label="Previous article" onClick={handleLeftClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M27.2 34.5 17.7 25q-.25-.25-.35-.5-.1-.25-.1-.55 0-.3.1-.525.1-.225.35-.475l9.55-9.55q.35-.35.825-.35t.825.35q.3.35.3.85t-.35.85l-8.9 8.85 8.95 8.95q.3.35.3.775 0 .425-.3.825-.35.35-.85.35t-.85-.35Z" /></svg>
             </button>
             <button type="button" aria-label="Next article" onClick={handleRightClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M17.95 34.5q-.3-.4-.325-.85-.025-.45.325-.8l8.9-8.9-8.9-8.9q-.35-.3-.325-.8.025-.5.325-.85.4-.35.825-.35.425 0 .775.35l9.55 9.55q.25.25.35.475.1.225.1.525 0 .3-.1.55-.1.25-.35.5l-9.5 9.5q-.35.35-.8.325-.45-.025-.85-.325Z" /></svg>
             </button>
           </div>
@@ -155,14 +166,17 @@ function App() {
               <h2>Tercer post de prova</h2>
             </a>
             <a aria-label="Link to project" href="/">
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 37.5q-.5 0-.825-.325-.325-.325-.325-.825v-11.2h-11.2q-.5 0-.825-.325Q10.5 24.5 10.5 24q0-.5.325-.825.325-.325.825-.325h11.2v-11.2q0-.5.325-.825.325-.325.825-.325.5 0 .825.325.325.325.325.825v11.2h11.2q.5 0 .825.325.325.325.325.825 0 .5-.325.825-.325.325-.825.325h-11.2v11.2q0 .5-.325.825-.325.325-.825.325Z" /></svg>
             </a>
           </div>
           <div className="article-nav-section article-section">
             <button type="button" aria-label="Previous article" onClick={handleLeftClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M27.2 34.5 17.7 25q-.25-.25-.35-.5-.1-.25-.1-.55 0-.3.1-.525.1-.225.35-.475l9.55-9.55q.35-.35.825-.35t.825.35q.3.35.3.85t-.35.85l-8.9 8.85 8.95 8.95q.3.35.3.775 0 .425-.3.825-.35.35-.85.35t-.85-.35Z" /></svg>
             </button>
             <button type="button" aria-label="Next article" onClick={handleRightClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M17.95 34.5q-.3-.4-.325-.85-.025-.45.325-.8l8.9-8.9-8.9-8.9q-.35-.3-.325-.8.025-.5.325-.85.4-.35.825-.35.425 0 .775.35l9.55 9.55q.25.25.35.475.1.225.1.525 0 .3-.1.55-.1.25-.35.5l-9.5 9.5q-.35.35-.8.325-.45-.025-.85-.325Z" /></svg>
             </button>
           </div>
@@ -177,14 +191,17 @@ function App() {
               <h2>Quart post de prova</h2>
             </a>
             <a aria-label="Link to project" href="/">
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 37.5q-.5 0-.825-.325-.325-.325-.325-.825v-11.2h-11.2q-.5 0-.825-.325Q10.5 24.5 10.5 24q0-.5.325-.825.325-.325.825-.325h11.2v-11.2q0-.5.325-.825.325-.325.825-.325.5 0 .825.325.325.325.325.825v11.2h11.2q.5 0 .825.325.325.325.325.825 0 .5-.325.825-.325.325-.825.325h-11.2v11.2q0 .5-.325.825-.325.325-.825.325Z" /></svg>
             </a>
           </div>
           <div className="article-nav-section article-section">
             <button type="button" aria-label="Previous article" onClick={handleLeftClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M27.2 34.5 17.7 25q-.25-.25-.35-.5-.1-.25-.1-.55 0-.3.1-.525.1-.225.35-.475l9.55-9.55q.35-.35.825-.35t.825.35q.3.35.3.85t-.35.85l-8.9 8.85 8.95 8.95q.3.35.3.775 0 .425-.3.825-.35.35-.85.35t-.85-.35Z" /></svg>
             </button>
             <button type="button" aria-label="Next article" onClick={handleRightClick}>
+              {/* eslint-disable-next-line max-len */}
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M17.95 34.5q-.3-.4-.325-.85-.025-.45.325-.8l8.9-8.9-8.9-8.9q-.35-.3-.325-.8.025-.5.325-.85.4-.35.825-.35.425 0 .775.35l9.55 9.55q.25.25.35.475.1.225.1.525 0 .3-.1.55-.1.25-.35.5l-9.5 9.5q-.35.35-.8.325-.45-.025-.85-.325Z" /></svg>
             </button>
           </div>
@@ -193,12 +210,9 @@ function App() {
       <div className="about-page" data-status="about-inactive">
         <p>About page</p>
       </div>
-      <div className="contact-page" data-status="contact-inactive">
-        <p>Contact page</p>
-        <button type="button" onClick={closeContact}>Close</button>
-      </div>
+      <ContactPage setContactPageActive={setContactPageActive} isAboutPageActive={isAboutPageActive} />
     </div>
   );
-}
+};
 
 export default App;

@@ -31,6 +31,26 @@
             "always"
         ],
         "@typescript-eslint/no-non-null-assertion": "off",
+        "max-len": ["error", {"code": 200}],
+        "import/no-unresolved": "off",
+        "import/extensions": [
+          "error",
+          "ignorePackages",
+          {
+            "": "never",
+            "js": "never",
+            "jsx": "never",
+            "ts": "never",
+            "tsx": "never"
+          }
+        ],
+        "react/function-component-definition": [
+            2,
+            {
+              "namedComponents": "arrow-function",
+              "unnamedComponents": "arrow-function"
+            }
+          ],
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
     }
 }

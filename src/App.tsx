@@ -3,6 +3,7 @@ import './App.css'
 function App() {
   let activeIndex = 0;
   let isAboutPageActive = false;
+  let isContactPageActive = false;
   const slides = document.getElementsByTagName('article');
 
   const handleLeftClick = () => {
@@ -46,10 +47,6 @@ function App() {
     }
   }
 
-  const handleContact = () => {
-    
-  }
-
   const handleWorkButton = () => {
     if (isAboutPageActive) {
       const aboutPage = (document.querySelector(".about-page") as HTMLElement);
@@ -58,6 +55,23 @@ function App() {
       document.title = "Work | Francesc Vila Subias"
     }
   }
+
+  const handleContact = () => {
+    if (!isContactPageActive) {
+      const contactPage = (document.querySelector(".contact-page") as HTMLElement);
+      contactPage.dataset.status = 'contact-active';
+      isContactPageActive = true;
+      document.title = "Contact | Francesc Vila Subias"
+    }
+  }
+
+  const closeContact = () => {
+    const contactPage = (document.querySelector(".contact-page") as HTMLElement);
+    contactPage.dataset.status = 'contact-inactive';
+    isContactPageActive = false;
+    document.title = isAboutPageActive ? "About | Francesc Vila Subias" : "Work | Francesc Vila Subias"
+  }
+
 
   return (
     <div className="App">
@@ -178,6 +192,10 @@ function App() {
   </main>
   <div className="about-page" data-status="about-inactive">
     <p>About page</p>
+  </div>
+  <div className="contact-page" data-status="contact-inactive">
+    <p>Contact page</p>
+    <button onClick={closeContact}>Close</button>
   </div>
     </div>
   )

@@ -130,7 +130,7 @@ main > article[data-status='becoming-active-from-after'] {
   transition: none;
 }
 
-.about-page {
+.about-page, .contact-page {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -139,11 +139,13 @@ main > article[data-status='becoming-active-from-after'] {
   border-top: 1px solid var(--border-color);
 }
 
-.about-page[data-status='about-active'] {
+.about-page[data-status='about-active'],
+.contact-page[data-status='contact-active'] {
   transform: translateY(118px);
 }
 
-.about-page[data-status='about-inactive'] {
+.about-page[data-status='about-inactive'],
+.contact-page[data-status='contact-inactive'] {
   transform: translateY(100%);
 }
 

@@ -49,8 +49,13 @@ const App = () => {
       aboutPage.dataset.status = 'about-active';
       setAboutPageActive(true);
       document.title = 'About | Francesc Vila Subias';
-      aboutPage.style.zIndex = '10';
-      contactPage.style.zIndex = '0';
+      if (isContactPageActive) {
+        aboutPage.style.zIndex = '10';
+        contactPage.style.zIndex = '0';
+      }
+      setTimeout(() => {
+        contactPage.dataset.status = 'contact-inactive';
+      }, 600);
     } else {
       const contactPage = (document.querySelector('.contact-page') as HTMLElement);
       contactPage.dataset.status = 'contact-inactive';
@@ -58,7 +63,7 @@ const App = () => {
   };
 
   const handleWorkButton = () => {
-    if (isAboutPageActive) {
+    if (isAboutPageActive || isContactPageActive) {
       const aboutPage = (document.querySelector('.about-page') as HTMLElement);
       aboutPage.dataset.status = 'about-inactive';
       setAboutPageActive(false);
@@ -210,7 +215,7 @@ const App = () => {
       <div className="about-page" data-status="about-inactive">
         <p>About page</p>
       </div>
-      <ContactPage setContactPageActive={setContactPageActive} isAboutPageActive={isAboutPageActive} />
+      <ContactPage />
     </div>
   );
 };

@@ -274,6 +274,10 @@ main > article > .article-nav-section > button:hover {
   padding-block: 3rem;
 }
 
+#contact-social-section > h2 {
+  text-align: center;
+}
+
 #contact-social-section > h2 > button {
   font-size: 1.5rem;
   padding: 0px;

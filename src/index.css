@@ -62,10 +62,6 @@ nav > .nav-section {
   gap: 6rem;
 }
 
-#nav-link-section > button {
-  font-size: 1rem;
-}
-
 #nav-social-section {
   gap: 3rem;
   font-size: 1.5rem;
@@ -228,6 +224,7 @@ main > article > .article-nav-section {
 button {
   border: 0px;
   background-color: var(--background-color);
+  font-size: 1rem;
 }
 
 button:hover {

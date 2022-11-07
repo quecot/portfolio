@@ -25,7 +25,7 @@ const ContactPage:React.FC = () => {
           <h2>
             You can
             {' '}
-            <button onClick={openContactMail} type="button">send and email</button>
+            <button onClick={openContactMail} type="button">send an email</button>
             {' '}
             or fill the form →
           </h2>
@@ -52,15 +52,15 @@ const ContactPage:React.FC = () => {
             <form id="form" onSubmit={handleFormSubmit}>
               <div id="form-name" className="form-field">
                 <span>NAME</span>
-                <input type="text" placeholder="What is your name?" />
+                <input type="text" required placeholder="What is your name?" />
               </div>
               <div id="form-email" className="form-field">
                 <span>EMAIL ADDRESS</span>
-                <input type="text" placeholder="email@example.com" />
+                <input type="text" required placeholder="email@example.com" />
               </div>
               <div id="form-message" className="form-field">
                 <span>MESSAGE</span>
-                <textarea placeholder="Write your message..." />
+                <textarea required placeholder="Write your message..." />
               </div>
               <button type="submit">Submit</button>
             </form>

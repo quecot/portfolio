@@ -100,7 +100,7 @@ main > article {
   position: absolute;
   left: 0px;
   top: 0px;
-  transition: transform 500ms ease;
+  transition: transform 400ms ease;
 }
 
 main > article[data-status='inactive'] {

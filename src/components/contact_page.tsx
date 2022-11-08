@@ -13,6 +13,7 @@ const ContactPage:React.FC = () => {
     const nameField = (document.querySelector('#form-name') as HTMLInputElement);
     const emailField = (document.querySelector('#form-email') as HTMLInputElement);
     const messageField = (document.querySelector('#form-message') as HTMLTextAreaElement);
+    const submitButton = (document.querySelector('#form-submit') as HTMLButtonElement);
 
     const name = nameField.value;
     const email = emailField.value;
@@ -21,6 +22,7 @@ const ContactPage:React.FC = () => {
     nameField.disabled = true;
     emailField.disabled = true;
     messageField.disabled = true;
+    submitButton.disabled = true;
 
     const emailParams = {
       name,

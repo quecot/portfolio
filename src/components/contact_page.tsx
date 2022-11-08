@@ -38,12 +38,7 @@ const ContactPage:React.FC = () => {
     emailjs.send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, emailParams, import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
       .then(() => {
         emailjs.send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_RESPONSE_TEMPLATE_ID, responseParams, import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-        nameField.value = '';
-        emailField.value = '';
-        messageField.value = '';
-        nameField.disabled = false;
-        emailField.disabled = false;
-        messageField.disabled = false;
+        window.location.reload();
       });
   };
 

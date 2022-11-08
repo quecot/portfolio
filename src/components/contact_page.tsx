@@ -98,7 +98,7 @@ const ContactPage:React.FC = () => {
                 <span>MESSAGE</span>
                 <textarea id="form-message" required placeholder="Write your message..." />
               </div>
-              <button type="submit">Submit</button>
+              <button id="form-submit" type="submit">Submit</button>
             </form>
           </div>
         </div>

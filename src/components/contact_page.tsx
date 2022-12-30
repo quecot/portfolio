@@ -1,28 +1,33 @@
-import React, { FormEvent } from 'react';
+import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
-const ContactPage:React.FC = () => {
+const ContactPage: React.FC = () => {
+  const nameField = useRef<HTMLInputElement>(null);
+  const emailField = useRef<HTMLInputElement>(null);
+  const messageField = useRef<HTMLTextAreaElement>(null);
+  const submitButton = useRef<HTMLButtonElement>(null);
+
   const openContactMail = () => {
     const email = 'francescvilasubias@gmail.com';
     const subject = 'Contact fvila.dev';
     window.open(`mailto:${email}?subject=${subject}`);
   };
 
-  const handleFormSubmit = (e: FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const nameField = (document.querySelector('#form-name') as HTMLInputElement);
-    const emailField = (document.querySelector('#form-email') as HTMLInputElement);
-    const messageField = (document.querySelector('#form-message') as HTMLTextAreaElement);
-    const submitButton = (document.querySelector('#form-submit') as HTMLButtonElement);
 
-    const name = nameField.value;
-    const email = emailField.value;
-    const message = messageField.value;
+    if (!nameField.current || !emailField.current || !messageField.current || !submitButton.current) {
+      return;
+    }
 
-    nameField.disabled = true;
-    emailField.disabled = true;
-    messageField.disabled = true;
-    submitButton.disabled = true;
+    const name = nameField.current.value.trim();
+    const email = emailField.current.value.trim();
+    const message = messageField.current.value.trim();
+
+    nameField.current.disabled = true;
+    emailField.current.disabled = true;
+    messageField.current.disabled = true;
+    submitButton.current.disabled = true;
 
     const emailParams = {
       name,
@@ -43,7 +48,6 @@ const ContactPage:React.FC = () => {
           });
       });
   };
-
   return (
     <div className="contact-page" data-status="contact-inactive">
       <div className="contact-layout">
@@ -85,17 +89,17 @@ const ContactPage:React.FC = () => {
             <form id="form" onSubmit={handleFormSubmit}>
               <div className="form-field">
                 <span>NAME</span>
-                <input id="form-name" type="text" required placeholder="What is your name?" />
+                <input ref={nameField} id="form-name" type="text" required placeholder="What is your name?" />
               </div>
               <div className="form-field">
-                <span>EMAIL ADDRESS</span>
-                <input id="form-email" type="text" required placeholder="email@example.com" />
+                <span>EMAIL</span>
+                <input ref={emailField} id="form-email" type="email" required placeholder="What is your email?" />
               </div>
               <div className="form-field">
                 <span>MESSAGE</span>
-                <textarea id="form-message" required placeholder="Write your message..." />
+                <textarea ref={messageField} id="form-message" required placeholder="What do you want to say?" />
               </div>
-              <button id="form-submit" type="submit">Submit</button>
+              <button ref={submitButton} id="form-submit" type="submit">Send</button>
             </form>
           </div>
         </div>
